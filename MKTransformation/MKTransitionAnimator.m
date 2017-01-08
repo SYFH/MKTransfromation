@@ -62,11 +62,6 @@
                toViewController:self.toController];
 }
 
-- (void)push {
-    [self pushViewController:self.fromController
-            toViewController:self.toController];
-}
-
 - (void)presentViewController:(UIViewController *)viewCOntroller
              toViewController:(UIViewController *)toViewController {
     toViewController.transitioningDelegate = self;
@@ -82,6 +77,16 @@
                                completion:nil];
 }
 
+- (void)dismiss {
+    self.fromController.transitioningDelegate = self;
+    [self.fromController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)push {
+    [self pushViewController:self.fromController
+            toViewController:self.toController];
+}
+
 - (void)pushViewController:(UIViewController *)viewController
           toViewController:(UIViewController *)toViewController {
     viewController.navigationController.delegate = self;
@@ -93,6 +98,11 @@
     self.fromController.navigationController.delegate = self;
     [self.fromController.navigationController pushViewController:toViewController
                                                    animated:YES];
+}
+
+- (void)pop {
+    self.fromController.transitioningDelegate = self;
+    [self.fromController.navigationController popViewControllerAnimated:YES];
 }
 
 // UIViewControllerTransitioningDelegate

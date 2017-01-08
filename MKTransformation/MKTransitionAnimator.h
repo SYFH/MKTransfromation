@@ -20,15 +20,16 @@
 
 // Transition -- 转场
 - (void)present;
-- (void)push;
-
 - (void)presentViewController:(UIViewController *)viewCOntroller
              toViewController:(UIViewController *)toViewController;
 - (void)presentToViewController:(UIViewController *)toViewController;
+- (void)dismiss;
 
+- (void)push;
 - (void)pushViewController:(UIViewController *)viewController
           toViewController:(UIViewController *)toViewController;
 - (void)pushToViewController:(UIViewController *)toViewController;
+- (void)pop;
 
 @end
 
