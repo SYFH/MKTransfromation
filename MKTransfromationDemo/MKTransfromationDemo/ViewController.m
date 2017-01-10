@@ -34,7 +34,7 @@
 //    [self.transformtor presentToViewController:secondController];
     self.transformtor.pushAnimateDelegate = self;
 //    [self.transformtor pushToViewController:secondController];
-    [self.transformtor pushAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
+    [self.transformtor pushToViewController:secondController withAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
         containerView.backgroundColor = [UIColor whiteColor];
         toView.frame = self.hitArea.frame;
         [containerView addSubview:toView];
@@ -43,7 +43,6 @@
             toView.frame = [UIScreen mainScreen].bounds;
         }];
     }];
-    [self.transformtor pushToViewController:secondController];
 }
 
 - (void)didReceiveMemoryWarning {

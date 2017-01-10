@@ -136,8 +136,8 @@
 
 @implementation MKTransitionAnimator (CustomPresentAnimate)
 
-- (void)presentAnimateBlock:(transitionAnimateParameters)animate {
-    self.presenAnimateBlock = animate;
+- (void)presentAnimateBlock:(transitionAnimateParameters)animateBlock {
+    self.presenAnimateBlock = animateBlock;
 }
 
 - (void)presentToViewController:(UIViewController *)toViewController withAnimateBlock:(transitionAnimateParameters)animateBlock {
@@ -145,16 +145,16 @@
     [self presentToViewController:toViewController];
 }
 
-- (void)dismissAnimateBlock:(transitionAnimateParameters)animate {
-    self.dismissAnimateBlock = animate;
+- (void)dismissAnimateBlock:(transitionAnimateParameters)animateBlock {
+    self.dismissAnimateBlock = animateBlock;
 }
 
 @end
 
 @implementation MKTransitionAnimator (CustomPushAnimate)
 
-- (void)pushAnimateBlock:(transitionAnimateParameters)animate {
-    self.pushAnimateBlock = animate;
+- (void)pushAnimateBlock:(transitionAnimateParameters)animateBlock {
+    self.pushAnimateBlock = animateBlock;
 }
 
 - (void)pushToViewController:(UIViewController *)toViewController withAnimateBlock:(transitionAnimateParameters)animateBlock {
@@ -162,8 +162,8 @@
     [self pushToViewController:toViewController];
 }
 
-- (void)popAnimateBlock:(transitionAnimateParameters)animate {
-    self.popAnimateBlock = animate;
+- (void)popAnimateBlock:(transitionAnimateParameters)animateBlock {
+    self.popAnimateBlock = animateBlock;
 }
 
 @end

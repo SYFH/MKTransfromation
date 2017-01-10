@@ -48,19 +48,19 @@
 // 自定义Present&Dismiss动画
 @interface MKTransitionAnimator (CustomPresentAnimate)
 
-- (void)presentAnimateBlock:(transitionAnimateParameters)animate;
+- (void)presentAnimateBlock:(transitionAnimateParameters)animateBlock;
 - (void)presentToViewController:(UIViewController *)toViewController
                withAnimateBlock:(transitionAnimateParameters)animateBlock;
-- (void)dismissAnimateBlock:(transitionAnimateParameters)animate;
+- (void)dismissAnimateBlock:(transitionAnimateParameters)animateBlock;
 
 @end
 
 // 自定义Push&Pop动画
 @interface MKTransitionAnimator (CustomPushAnimate)
 
-- (void)pushAnimateBlock:(transitionAnimateParameters)animate;
+- (void)pushAnimateBlock:(transitionAnimateParameters)animateBlock;
 - (void)pushToViewController:(UIViewController *)toViewController
             withAnimateBlock:(transitionAnimateParameters)animateBlock;
-- (void)popAnimateBlock:(transitionAnimateParameters)animate;
+- (void)popAnimateBlock:(transitionAnimateParameters)animateBlock;
 
 @end
