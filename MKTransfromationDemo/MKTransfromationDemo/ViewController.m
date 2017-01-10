@@ -33,6 +33,16 @@
     SecondController *secondController = [[SecondController alloc] init];
 //    [self.transformtor presentToViewController:secondController];
     self.transformtor.pushAnimateDelegate = self;
+//    [self.transformtor pushToViewController:secondController];
+    [self.transformtor pushAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
+        containerView.backgroundColor = [UIColor whiteColor];
+        toView.frame = self.hitArea.frame;
+        [containerView addSubview:toView];
+        
+        [UIView animateWithDuration:[self pushAnimateDuration] animations:^{
+            toView.frame = [UIScreen mainScreen].bounds;
+        }];
+    }];
     [self.transformtor pushToViewController:secondController];
 }
 
@@ -41,19 +51,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 懒加载
+#pragma mark - 代理
 - (NSTimeInterval)pushAnimateDuration {
     return 0.25;
 }
 
-- (void)pushAnimateWillAnimateWithFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
-    
+- (void)pushAnimateDidAnimateFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
     containerView.backgroundColor = [UIColor whiteColor];
     toView.frame = self.hitArea.frame;
     [containerView addSubview:toView];
-}
-
-- (void)pushAnimateDidAnimateFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
+    
     [UIView animateWithDuration:[self pushAnimateDuration] animations:^{
         toView.frame = [UIScreen mainScreen].bounds;
     }];

@@ -140,6 +140,11 @@
     self.presenAnimateBlock = animate;
 }
 
+- (void)presentToViewController:(UIViewController *)toViewController withAnimateBlock:(transitionAnimateParameters)animateBlock {
+    [self settingToController:toViewController];
+    [self presentToViewController:toViewController];
+}
+
 - (void)dismissAnimateBlock:(transitionAnimateParameters)animate {
     self.dismissAnimateBlock = animate;
 }
@@ -150,6 +155,11 @@
 
 - (void)pushAnimateBlock:(transitionAnimateParameters)animate {
     self.pushAnimateBlock = animate;
+}
+
+- (void)pushToViewController:(UIViewController *)toViewController withAnimateBlock:(transitionAnimateParameters)animateBlock {
+    [self settingToController:toViewController];
+    [self pushToViewController:toViewController];
 }
 
 - (void)popAnimateBlock:(transitionAnimateParameters)animate {

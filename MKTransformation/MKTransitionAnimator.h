@@ -49,6 +49,8 @@
 @interface MKTransitionAnimator (CustomPresentAnimate)
 
 - (void)presentAnimateBlock:(transitionAnimateParameters)animate;
+- (void)presentToViewController:(UIViewController *)toViewController
+               withAnimateBlock:(transitionAnimateParameters)animateBlock;
 - (void)dismissAnimateBlock:(transitionAnimateParameters)animate;
 
 @end
@@ -57,6 +59,8 @@
 @interface MKTransitionAnimator (CustomPushAnimate)
 
 - (void)pushAnimateBlock:(transitionAnimateParameters)animate;
+- (void)pushToViewController:(UIViewController *)toViewController
+            withAnimateBlock:(transitionAnimateParameters)animateBlock;
 - (void)popAnimateBlock:(transitionAnimateParameters)animate;
 
 @end
