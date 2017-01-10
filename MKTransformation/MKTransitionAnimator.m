@@ -19,6 +19,8 @@
 @property (nonatomic, copy) transitionAnimateParameters pushAnimateBlock;
 @property (nonatomic, copy) transitionAnimateParameters popAnimateBlock;
 
+@property (nonatomic, strong) MKPushAnimator *pushAnimator;
+
 @end
 
 @implementation MKTransitionAnimator
@@ -114,12 +116,20 @@
                                                 fromViewController:(UIViewController *)fromVC
                                                   toViewController:(UIViewController *)toVC {
     if (operation == UINavigationControllerOperationPush) {
-        return [[MKPushAnimator alloc] initWithAnimator:self];
+        return self.pushAnimator;
     } else if (operation == UINavigationControllerOperationPop) {
         return [[MKPopAnimator alloc] initWithAnimate:self.popAnimateBlock];
     } else {
         return nil;
     }
+}
+
+// 懒加载
+- (MKPushAnimator *)pushAnimator {
+    if (!_pushAnimator) {
+        _pushAnimator = [[MKPushAnimator alloc] initWithAnimator:self];
+    }
+    return _pushAnimator;
 }
 
 @end

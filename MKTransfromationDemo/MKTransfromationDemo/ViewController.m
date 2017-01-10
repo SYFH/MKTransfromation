@@ -48,10 +48,15 @@
 
 - (void)pushAnimateWillAnimateWithFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
     
+    containerView.backgroundColor = [UIColor whiteColor];
+    toView.frame = self.hitArea.frame;
+    [containerView addSubview:toView];
 }
 
 - (void)pushAnimateDidAnimateFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
-    
+    [UIView animateWithDuration:[self pushAnimateDuration] animations:^{
+        toView.frame = [UIScreen mainScreen].bounds;
+    }];
 }
 
 - (void)pushAnimateEndAnimateFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
