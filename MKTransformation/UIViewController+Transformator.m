@@ -12,10 +12,13 @@
 @implementation UIViewController (Transformator)
 
 - (MKTransitionAnimator *)transformtor {
-    MKTransitionAnimator *animator = [[MKTransitionAnimator alloc] init];
-    [animator settingFromController:self];
-    self.transformtor = animator;
-    return objc_getAssociatedObject(self, @selector(transformtor));
+    MKTransitionAnimator *animator = objc_getAssociatedObject(self, @selector(transformtor));
+    if (!animator) {
+        animator = [[MKTransitionAnimator alloc] init];
+        [animator settingFromController:self];
+        self.transformtor = animator;
+    }
+    return animator;
 }
 
 - (void)setTransformtor:(MKTransitionAnimator *)transformtor {

@@ -10,7 +10,7 @@
 #import "SecondController.h"
 #import "UIViewController+Transformator.h"
 
-@interface ViewController ()<UITableViewDelegate>
+@interface ViewController ()<UITableViewDelegate, MKTransitionPushProtocol>
 
 @property (nonatomic, strong) UIControl *hitArea;
 
@@ -31,12 +31,31 @@
 
 - (void)hitAreaHit:(UIControl *)sendr {
     SecondController *secondController = [[SecondController alloc] init];
-    [self.transformtor presentToViewController:secondController];
+//    [self.transformtor presentToViewController:secondController];
+    self.transformtor.pushAnimateDelegate = self;
+    [self.transformtor pushToViewController:secondController];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 懒加载
+- (NSTimeInterval)pushAnimateDuration {
+    return 0.25;
+}
+
+- (void)pushAnimateWillAnimateWithFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
+    
+}
+
+- (void)pushAnimateDidAnimateFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
+    
+}
+
+- (void)pushAnimateEndAnimateFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
+    
 }
 
 #pragma mark - 懒加载

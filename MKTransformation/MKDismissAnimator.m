@@ -40,50 +40,14 @@
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-    UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIView *fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
+    UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
     UIView *containerView = transitionContext.containerView;
 
     if (self.animateBlock) {
-        self.animateBlock(fromController, toController, containerView);
-    } else if (self.animator.presentAnimateDelegate) {
-        if ([self.animator.presentAnimateDelegate respondsToSelector:@selector(presentAnimateWillAnimateFromController:toController:containerView:)]) {
-            [self.animator.presentAnimateDelegate presentAnimateWillAnimateFromController:fromController
-                                                                             toController:toController
-                                                                            containerView:containerView];
-        }
-        if ([self.animator.presentAnimateDelegate respondsToSelector:@selector(presentAnimateDidAnimateFromController:toController:containerView:)]) {
-            [self.animator.presentAnimateDelegate presentAnimateDidAnimateFromController:fromController
-                                                                            toController:toController
-                                                                           containerView:containerView];
-        }
-        
-        NSOperationQueue *queue = [NSOperationQueue mainQueue];
-        NSBlockOperation *end = [NSBlockOperation blockOperationWithBlock:^{
-            if ([self.animator.presentAnimateDelegate respondsToSelector:@selector(presentAnimateEndAnimateFromController:toController:containerView:)]) {
-                [self.animator.presentAnimateDelegate presentAnimateEndAnimateFromController:fromController
-                                                                                toController:toController
-                                                                               containerView:containerView];
-            }
-        }];
-        NSBlockOperation *over = [NSBlockOperation blockOperationWithBlock:^{
-            BOOL wasCancelled = [transitionContext transitionWasCancelled];
-            [transitionContext completeTransition:!wasCancelled];
-        }];
-        [queue addOperation:end];
-        [queue addOperation:over];
-        [over addDependency:end];
+        self.animateBlock(fromView, toView, containerView);
     } else {
-        UIView *fromView;
-        UIView *toView;
-        
-        if ([transitionContext respondsToSelector:@selector(viewForKey:)]) {
-            fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
-            toView = [transitionContext viewForKey:UITransitionContextToViewKey];
-        } else {
-            fromView = fromController.view;
-            toView = toController.view;
-        }
         
         CGRect screenBounds = [UIScreen mainScreen].bounds;
         fromView.frame = [transitionContext finalFrameForViewController:toController];

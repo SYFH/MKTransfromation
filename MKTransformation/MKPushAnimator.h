@@ -5,13 +5,11 @@
 
 #import <Foundation/Foundation.h>
 #import "UIKit/UIKit.h"
-#import "MKTransitionCommon.h"
 
 @class MKTransitionAnimator;
 
 @interface MKPushAnimator : NSObject<UIViewControllerAnimatedTransitioning>
 
-- (instancetype)initWithAnimate:(transitionAnimateParameters)animate;
 - (instancetype)initWithAnimator:(MKTransitionAnimator *)animator;
 
 @end

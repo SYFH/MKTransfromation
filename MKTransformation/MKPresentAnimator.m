@@ -52,12 +52,12 @@
     }
 
     if (self.animateBlock) {
-        self.animateBlock(fromController, toController, containerView);
+        self.animateBlock(fromView, toView, containerView);
     } else {
         CGRect screenBounds = [UIScreen mainScreen].bounds;
         toView.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, screenBounds.size.height);
         [containerView addSubview:toView];
-
+        
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             toView.frame = [transitionContext finalFrameForViewController:toController];
         } completion:^(BOOL finished) {

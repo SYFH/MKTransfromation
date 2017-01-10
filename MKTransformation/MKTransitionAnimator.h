@@ -37,6 +37,12 @@
 @property (nonatomic, weak) id<MKTransitionPushProtocol> pushAnimateDelegate;
 @property (nonatomic, weak) id<MKTransitionPopProtocol> popAnimateDelegate;
 
+// Block -- 动画回调
+@property (nonatomic, copy, readonly) transitionAnimateParameters presenAnimateBlock;
+@property (nonatomic, copy, readonly) transitionAnimateParameters dismissAnimateBlock;
+@property (nonatomic, copy, readonly) transitionAnimateParameters pushAnimateBlock;
+@property (nonatomic, copy, readonly) transitionAnimateParameters popAnimateBlock;
+
 @end
 
 // 自定义Present&Dismiss动画

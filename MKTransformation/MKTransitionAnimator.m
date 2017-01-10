@@ -114,7 +114,7 @@
                                                 fromViewController:(UIViewController *)fromVC
                                                   toViewController:(UIViewController *)toVC {
     if (operation == UINavigationControllerOperationPush) {
-        return [[MKPushAnimator alloc] initWithAnimate:self.pushAnimateBlock];
+        return [[MKPushAnimator alloc] initWithAnimator:self];
     } else if (operation == UINavigationControllerOperationPop) {
         return [[MKPopAnimator alloc] initWithAnimate:self.popAnimateBlock];
     } else {
