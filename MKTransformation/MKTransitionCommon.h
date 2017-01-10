@@ -7,7 +7,5 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^transitionAnimateParameters)(UIViewController *fromViewController,
-        UIViewController *toViewController,
-        UIView *fromView, UIView *toView,
-        UIView *containerView,
-        id <UIViewControllerContextTransitioning> transitionContext);
+                                           UIViewController *toViewController,
+                                           UIView *containerView);

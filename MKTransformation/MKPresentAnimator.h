@@ -7,8 +7,11 @@
 #import <UIKit/UIKit.h>
 #import "MKTransitionCommon.h"
 
+@class MKTransitionAnimator;
+
 @interface MKPresentAnimator : NSObject<UIViewControllerAnimatedTransitioning>
 
 - (instancetype)initWithAnimate:(transitionAnimateParameters)animate;
+- (instancetype)initWithAnimator:(MKTransitionAnimator *)animator;
 
 @end

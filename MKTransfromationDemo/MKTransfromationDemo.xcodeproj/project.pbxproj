@@ -62,6 +62,7 @@
 		0B4198511E22202F00DAEFF7 /* MKTransitionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTransitionCommon.h; sourceTree = "<group>"; };
 		0B4198521E22202F00DAEFF7 /* UIViewController+Transformator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Transformator.h"; sourceTree = "<group>"; };
 		0B4198531E22202F00DAEFF7 /* UIViewController+Transformator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Transformator.m"; sourceTree = "<group>"; };
+		0BBAA51A1E247CCA0086758B /* MKTransitionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKTransitionProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +151,7 @@
 				0B41984F1E22202F00DAEFF7 /* MKTransitionAnimator.h */,
 				0B4198501E22202F00DAEFF7 /* MKTransitionAnimator.m */,
 				0B4198511E22202F00DAEFF7 /* MKTransitionCommon.h */,
+				0BBAA51A1E247CCA0086758B /* MKTransitionProtocol.h */,
 				0B4198521E22202F00DAEFF7 /* UIViewController+Transformator.h */,
 				0B4198531E22202F00DAEFF7 /* UIViewController+Transformator.m */,
 			);
@@ -463,6 +465,7 @@
 				0B41983D1E22112400DAEFF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B41983E1E22112400DAEFF7 /* Build configuration list for PBXNativeTarget "MKTransfromationDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +474,7 @@
 				0B4198401E22112400DAEFF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

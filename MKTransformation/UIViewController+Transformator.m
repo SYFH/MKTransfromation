@@ -7,13 +7,19 @@
 //
 
 #import "UIViewController+Transformator.h"
+#import <objc/runtime.h>
 
 @implementation UIViewController (Transformator)
 
 - (MKTransitionAnimator *)transformtor {
     MKTransitionAnimator *animator = [[MKTransitionAnimator alloc] init];
     [animator settingFromController:self];
-    return animator;
+    self.transformtor = animator;
+    return objc_getAssociatedObject(self, @selector(transformtor));
+}
+
+- (void)setTransformtor:(MKTransitionAnimator *)transformtor {
+    objc_setAssociatedObject(self, @selector(transformtor), transformtor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

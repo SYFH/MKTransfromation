@@ -10,7 +10,7 @@
 #import "SecondController.h"
 #import "UIViewController+Transformator.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDelegate>
 
 @property (nonatomic, strong) UIControl *hitArea;
 

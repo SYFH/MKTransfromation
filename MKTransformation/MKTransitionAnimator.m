@@ -24,14 +24,6 @@
 @implementation MKTransitionAnimator
 
 // 自定义初始化
-+ (instancetype)defaulfAnimator {
-    static dispatch_once_t onceToken;
-    static MKTransitionAnimator *_instance = nil;
-    dispatch_once(&onceToken, ^{
-        _instance = [[MKTransitionAnimator alloc] init];
-    });
-    return _instance;
-}
 
 + (instancetype)animatorFromController:(UIViewController *)fromController
                           toController:(UIViewController *)toController {
@@ -134,11 +126,11 @@
 
 @implementation MKTransitionAnimator (CustomPresentAnimate)
 
-- (void)presentAnimate:(transitionAnimateParameters)animate {
+- (void)presentAnimateBlock:(transitionAnimateParameters)animate {
     self.presenAnimateBlock = animate;
 }
 
-- (void)dismissAnimate:(transitionAnimateParameters)animate {
+- (void)dismissAnimateBlock:(transitionAnimateParameters)animate {
     self.dismissAnimateBlock = animate;
 }
 
@@ -146,11 +138,11 @@
 
 @implementation MKTransitionAnimator (CustomPushAnimate)
 
-- (void)pushAnimate:(transitionAnimateParameters)animate {
+- (void)pushAnimateBlock:(transitionAnimateParameters)animate {
     self.pushAnimateBlock = animate;
 }
 
-- (void)popAnimate:(transitionAnimateParameters)animate {
+- (void)popAnimateBlock:(transitionAnimateParameters)animate {
     self.popAnimateBlock = animate;
 }
 

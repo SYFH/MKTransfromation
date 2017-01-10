@@ -4,11 +4,11 @@
 //
 
 #import "MKTransitionCommon.h"
+#import "MKTransitionProtocol.h"
 
 @interface MKTransitionAnimator : NSObject
 
 // Initial -- 初始化
-+ (instancetype)defaulfAnimator;
 + (instancetype)animatorFromController:(UIViewController *)fromController
                           toController:(UIViewController *)toController;
 
@@ -31,20 +31,26 @@
 - (void)pushToViewController:(UIViewController *)toViewController;
 - (void)pop;
 
+// Delegate -- 动画代理
+@property (nonatomic, weak) id<MKTransitionPresentProtocol> presentAnimateDelegate;
+@property (nonatomic, weak) id<MKTransitionDismissProtocol> didmissAnimateDelegate;
+@property (nonatomic, weak) id<MKTransitionPushProtocol> pushAnimateDelegate;
+@property (nonatomic, weak) id<MKTransitionPopProtocol> popAnimateDelegate;
+
 @end
 
 // 自定义Present&Dismiss动画
 @interface MKTransitionAnimator (CustomPresentAnimate)
 
-- (void)presentAnimate:(transitionAnimateParameters)animate;
-- (void)dismissAnimate:(transitionAnimateParameters)animate;
+- (void)presentAnimateBlock:(transitionAnimateParameters)animate;
+- (void)dismissAnimateBlock:(transitionAnimateParameters)animate;
 
 @end
 
 // 自定义Push&Pop动画
 @interface MKTransitionAnimator (CustomPushAnimate)
 
-- (void)pushAnimate:(transitionAnimateParameters)animate;
-- (void)popAnimate:(transitionAnimateParameters)animate;
+- (void)pushAnimateBlock:(transitionAnimateParameters)animate;
+- (void)popAnimateBlock:(transitionAnimateParameters)animate;
 
 @end

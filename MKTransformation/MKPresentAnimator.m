@@ -4,10 +4,12 @@
 //
 
 #import "MKPresentAnimator.h"
+#import "MKTransitionAnimator.h"
 
 @interface MKPresentAnimator ()
 
 @property (nonatomic, copy) transitionAnimateParameters animateBlock;
+@property (nonatomic, weak) MKTransitionAnimator *animator;
 
 @end
 
@@ -17,6 +19,14 @@
     self = [super init];
     if (self) {
         self.animateBlock = animate;
+    }
+    return self;
+}
+
+- (instancetype)initWithAnimator:(MKTransitionAnimator *)animator {
+    self = [super init];
+    if (self) {
+        self.animator = animator;
     }
     return self;
 }
@@ -42,7 +52,7 @@
     }
 
     if (self.animateBlock) {
-        self.animateBlock(fromController, toController, fromView, toView, containerView, transitionContext);
+        self.animateBlock(fromController, toController, containerView);
     } else {
         CGRect screenBounds = [UIScreen mainScreen].bounds;
         toView.frame = CGRectMake(0, screenBounds.size.height, screenBounds.size.width, screenBounds.size.height);
