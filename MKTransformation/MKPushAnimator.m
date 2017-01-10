@@ -64,23 +64,11 @@
     UIView *containerView = transitionContext.containerView;
     
     NSOperationQueue *queue = [NSOperationQueue mainQueue];
-    NSBlockOperation *willOperation = [NSBlockOperation blockOperationWithBlock:^{
-        if ([self.animator.pushAnimateDelegate respondsToSelector:@selector(pushAnimateWillAnimateWithFromView:toView:containerView:)]) {
-            [self.animator.pushAnimateDelegate pushAnimateWillAnimateWithFromView:fromView
-                                                                           toView:toView
-                                                                    containerView:containerView];
-        }
-    }];
+    __weak typeof(self) weakSelf = self;
     NSBlockOperation *didOperation = [NSBlockOperation blockOperationWithBlock:^{
-        if ([self.animator.pushAnimateDelegate respondsToSelector:@selector(pushAnimateDidAnimateFromView:toView:containerView:)]) {
-            [self.animator.pushAnimateDelegate pushAnimateDidAnimateFromView:fromView
-                                                                      toView:toView
-                                                               containerView:containerView];
-        }
-    }];
-    NSBlockOperation *endOperation = [NSBlockOperation blockOperationWithBlock:^{
-        if ([self.animator.pushAnimateDelegate respondsToSelector:@selector(pushAnimateEndAnimateFromView:toView:containerView:)]) {
-            [self.animator.pushAnimateDelegate pushAnimateEndAnimateFromView:fromView
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if ([strongSelf.animator.pushAnimateDelegate respondsToSelector:@selector(pushAnimateDidAnimateFromView:toView:containerView:)]) {
+            [strongSelf.animator.pushAnimateDelegate pushAnimateDidAnimateFromView:fromView
                                                                       toView:toView
                                                                containerView:containerView];
         }
@@ -90,12 +78,8 @@
         [transitionContext completeTransition:!wasCancelled];
     }];
     
-    [overOperation addDependency:endOperation];
-    [endOperation addDependency:didOperation];
-    [didOperation addDependency:willOperation];
-    [queue addOperation:willOperation];
+    [overOperation addDependency:didOperation];
     [queue addOperation:didOperation];
-    [queue addOperation:endOperation];
     [queue addOperation:overOperation];
 }
 

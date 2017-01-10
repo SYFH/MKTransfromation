@@ -10,13 +10,7 @@
 
 // push
 - (NSTimeInterval)pushAnimateDuration;
-- (void)pushAnimateWillAnimateWithFromView:(UIView *)fromView
-                                    toView:(UIView *)toView
-                             containerView:(UIView *)containerView;
 - (void)pushAnimateDidAnimateFromView:(UIView *)fromView
-                               toView:(UIView *)toView
-                        containerView:(UIView *)containerView;
-- (void)pushAnimateEndAnimateFromView:(UIView *)fromView
                                toView:(UIView *)toView
                         containerView:(UIView *)containerView;
 
@@ -26,13 +20,7 @@
 
 // pop
 - (NSTimeInterval)popAnimateDuration;
-- (void)popAnimateWillAnimateFromView:(UIView *)fromView
-                               toView:(UIView *)toView
-                        containerView:(UIView *)containerView;
 - (void)popAnimateDidAnimateFromView:(UIView *)fromView
-                              toView:(UIView *)toView
-                       containerView:(UIView *)containerView;
-- (void)popAnimateEndAnimateFromView:(UIView *)fromView
                               toView:(UIView *)toView
                        containerView:(UIView *)containerView;
 
@@ -42,13 +30,7 @@
 
 // present
 - (NSTimeInterval)presentAnimateDuration;
-- (void)presentAnimateWillAnimateFromView:(UIView *)fromView
-                                   toView:(UIView *)toView
-                            containerView:(UIView *)containerView;
 - (void)presentAnimateDidAnimateFromView:(UIView *)fromView
-                                  toView:(UIView *)toView
-                           containerView:(UIView *)containerView;
-- (void)presentAnimateEndAnimateFromView:(UIView *)fromView
                                   toView:(UIView *)toView
                            containerView:(UIView *)containerView;
 
@@ -58,13 +40,7 @@
 
 // dismiss
 - (NSTimeInterval)dismissAnimateDuration;
-- (void)dismissAnimateWillAnimateFromView:(UIView *)fromView
-                                   toView:(UIView *)toView
-                            containerView:(UIView *)containerView;
 - (void)dismissAnimateDidAnimateFromView:(UIView *)fromView
-                                  toView:(UIView *)toView
-                           containerView:(UIView *)containerView;
-- (void)dismissAnimateEndAnimateFromView:(UIView *)fromView
                                   toView:(UIView *)toView
                            containerView:(UIView *)containerView;
 

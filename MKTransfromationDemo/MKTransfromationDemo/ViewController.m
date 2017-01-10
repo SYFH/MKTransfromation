@@ -59,10 +59,6 @@
     }];
 }
 
-- (void)pushAnimateEndAnimateFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
-    
-}
-
 #pragma mark - 懒加载
 - (UIControl *)hitArea {
     if (!_hitArea) {
