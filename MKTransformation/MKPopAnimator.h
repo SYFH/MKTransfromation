@@ -5,10 +5,11 @@
 
 #import <Foundation/Foundation.h>
 #import "UIKit/UIKit.h"
-#import "MKTransitionCommon.h"
+
+@class MKTransitionAnimator;
 
 @interface MKPopAnimator : NSObject<UIViewControllerAnimatedTransitioning>
 
-- (instancetype)initWithAnimate:(transitionAnimateParameters)animate;
+- (instancetype)initWithAnimator:(MKTransitionAnimator *)animator;
 
 @end

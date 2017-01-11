@@ -10,4 +10,6 @@
 
 @interface SecondController : UIViewController
 
+@property (nonatomic, assign) CGRect restoreFrame;
+
 @end

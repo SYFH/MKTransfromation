@@ -22,8 +22,29 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.transformtor popAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
+        
+        toView.frame = [UIScreen mainScreen].bounds;
+        [containerView addSubview:toView];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            fromView.frame = self.restoreFrame;
+        }];
+    }];
+    
     [self.transformtor pop];
-    [self.transformtor dismiss];
+    
+//    [self.transformtor dismissAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
+//        fromView.frame = [UIScreen mainScreen].bounds;
+//        toView.frame = [UIScreen mainScreen].bounds;
+//        [containerView addSubview:toView];
+//        [containerView addSubview:fromView];
+//        
+//        [UIView animateWithDuration:0.25 animations:^{
+//            fromView.alpha = 0;
+//        }];
+//    }];
+//    [self.transformtor dismiss];
 }
 
 - (void)didReceiveMemoryWarning {

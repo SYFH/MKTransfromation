@@ -31,15 +31,26 @@
 
 - (void)hitAreaHit:(UIControl *)sendr {
     SecondController *secondController = [[SecondController alloc] init];
-//    [self.transformtor presentToViewController:secondController];
-    self.transformtor.pushAnimateDelegate = self;
-//    [self.transformtor pushToViewController:secondController];
+    CGRect frame = self.hitArea.frame;
+    
+    [self.transformtor popAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
+        
+        fromView.frame = [UIScreen mainScreen].bounds;
+        toView.frame = [UIScreen mainScreen].bounds;
+        [containerView addSubview:toView];
+        [containerView addSubview:fromView];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            fromView.frame = frame;
+        }];
+    }];
+    
     [self.transformtor pushToViewController:secondController withAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
-        containerView.backgroundColor = [UIColor whiteColor];
+        
         toView.frame = self.hitArea.frame;
         [containerView addSubview:toView];
         
-        [UIView animateWithDuration:[self pushAnimateDuration] animations:^{
+        [UIView animateWithDuration:0.25 animations:^{
             toView.frame = [UIScreen mainScreen].bounds;
         }];
     }];

@@ -31,9 +31,21 @@
 - (void)pushToViewController:(UIViewController *)toViewController;
 - (void)pop;
 
+// Time -- 转场时间
+@property (nonatomic, assign) NSTimeInterval transitionDuration;
+
+// Color -- 容器颜色
+@property (nonatomic, strong) UIColor *containerBackgroundColor;
+
+// System Animate -- 系统自带动画
+@property (nonatomic, assign) UIViewAnimationOptions pushAnimateOptions;
+@property (nonatomic, assign) UIViewAnimationOptions popAnimateOptions;
+@property (nonatomic, assign) UIViewAnimationOptions presentAnimateOptions;
+@property (nonatomic, assign) UIViewAnimationOptions dismissAnimateOptions;
+
 // Delegate -- 动画代理
 @property (nonatomic, weak) id<MKTransitionPresentProtocol> presentAnimateDelegate;
-@property (nonatomic, weak) id<MKTransitionDismissProtocol> didmissAnimateDelegate;
+@property (nonatomic, weak) id<MKTransitionDismissProtocol> dismissAnimateDelegate;
 @property (nonatomic, weak) id<MKTransitionPushProtocol> pushAnimateDelegate;
 @property (nonatomic, weak) id<MKTransitionPopProtocol> popAnimateDelegate;
 

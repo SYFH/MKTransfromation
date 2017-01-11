@@ -20,12 +20,27 @@
 @property (nonatomic, copy) transitionAnimateParameters popAnimateBlock;
 
 @property (nonatomic, strong) MKPushAnimator *pushAnimator;
+@property (nonatomic, strong) MKPopAnimator *popAnimator;
+@property (nonatomic, strong) MKPresentAnimator *presentAnimator;
+@property (nonatomic, strong) MKDismissAnimator *dismissAnimator;
 
 @end
 
 @implementation MKTransitionAnimator
 
 // 自定义初始化
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self defaultSetting];
+    }
+    return self;
+}
+
+- (void)defaultSetting {
+    self.transitionDuration = 0.25;
+    self.containerBackgroundColor = [UIColor whiteColor];
+}
 
 + (instancetype)animatorFromController:(UIViewController *)fromController
                           toController:(UIViewController *)toController {
@@ -103,11 +118,11 @@
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                    presentingController:(UIViewController *)presenting
                                                                        sourceController:(UIViewController *)source {
-    return [[MKPresentAnimator alloc] initWithAnimate:self.presenAnimateBlock];
+    return self.presentAnimator;
 }
 
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return [[MKDismissAnimator alloc] initWithAnimate:self.dismissAnimateBlock];
+    return self.dismissAnimator;
 }
 
 // UINavigationControllerDelegate
@@ -118,7 +133,7 @@
     if (operation == UINavigationControllerOperationPush) {
         return self.pushAnimator;
     } else if (operation == UINavigationControllerOperationPop) {
-        return [[MKPopAnimator alloc] initWithAnimate:self.popAnimateBlock];
+        return self.popAnimator;
     } else {
         return nil;
     }
@@ -132,6 +147,27 @@
     return _pushAnimator;
 }
 
+- (MKPopAnimator *)popAnimator {
+    if (!_popAnimator) {
+        _popAnimator = [[MKPopAnimator alloc] initWithAnimator:self];
+    }
+    return _popAnimator;
+}
+
+- (MKPresentAnimator *)presentAnimator {
+    if (!_presentAnimator) {
+        _presentAnimator = [[MKPresentAnimator alloc] initWithAnimator:self];
+    }
+    return _presentAnimator;
+}
+
+- (MKDismissAnimator *)dismissAnimator {
+    if (!_dismissAnimator) {
+        _dismissAnimator = [[MKDismissAnimator alloc] initWithAnimator:self];
+    }
+    return _dismissAnimator;
+}
+
 @end
 
 @implementation MKTransitionAnimator (CustomPresentAnimate)
@@ -140,7 +176,9 @@
     self.presenAnimateBlock = animateBlock;
 }
 
-- (void)presentToViewController:(UIViewController *)toViewController withAnimateBlock:(transitionAnimateParameters)animateBlock {
+- (void)presentToViewController:(UIViewController *)toViewController
+               withAnimateBlock:(transitionAnimateParameters)animateBlock {
+    self.presenAnimateBlock = animateBlock;
     [self settingToController:toViewController];
     [self presentToViewController:toViewController];
 }
@@ -157,7 +195,9 @@
     self.pushAnimateBlock = animateBlock;
 }
 
-- (void)pushToViewController:(UIViewController *)toViewController withAnimateBlock:(transitionAnimateParameters)animateBlock {
+- (void)pushToViewController:(UIViewController *)toViewController
+            withAnimateBlock:(transitionAnimateParameters)animateBlock {
+    self.pushAnimateBlock = animateBlock;
     [self settingToController:toViewController];
     [self pushToViewController:toViewController];
 }
