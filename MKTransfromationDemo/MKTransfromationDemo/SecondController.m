@@ -32,8 +32,6 @@
         }];
     }];
     
-    [self.transformtor pop];
-    
 //    [self.transformtor dismissAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
 //        fromView.frame = [UIScreen mainScreen].bounds;
 //        toView.frame = [UIScreen mainScreen].bounds;

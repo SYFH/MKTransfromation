@@ -31,20 +31,7 @@
 
 - (void)hitAreaHit:(UIControl *)sendr {
     SecondController *secondController = [[SecondController alloc] init];
-    CGRect frame = self.hitArea.frame;
-    
-    [self.transformtor popAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
-        
-        fromView.frame = [UIScreen mainScreen].bounds;
-        toView.frame = [UIScreen mainScreen].bounds;
-        [containerView addSubview:toView];
-        [containerView addSubview:fromView];
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            fromView.frame = frame;
-        }];
-    }];
-    
+    self.transformtor.transitionDuration = 0.25;
     [self.transformtor pushToViewController:secondController withAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
         
         toView.frame = self.hitArea.frame;

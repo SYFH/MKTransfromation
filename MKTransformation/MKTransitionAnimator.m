@@ -8,6 +8,7 @@
 #import "MKDismissAnimator.h"
 #import "MKPushAnimator.h"
 #import "MKPopAnimator.h"
+#import "UIViewController+Transformator.h"
 
 @interface MKTransitionAnimator ()<UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 
@@ -110,6 +111,14 @@
 }
 
 - (void)pop {
+    // 转移动画的执行者
+    if (self.fromController.navigationController) {
+        NSArray *controllers = self.fromController.navigationController.viewControllers;
+        UIViewController *toViewController = controllers[controllers.count - 2];
+        toViewController.transformtor.popAnimateBlock = self.fromController.transformtor.popAnimateBlock;
+        toViewController.transformtor.popAnimateDelegate = self.fromController.transformtor.popAnimateDelegate;
+        toViewController.transformtor.popAnimateOptions = self.fromController.transformtor.popAnimateOptions;
+    }
     self.fromController.transitioningDelegate = self;
     [self.fromController.navigationController popViewControllerAnimated:YES];
 }
@@ -141,30 +150,22 @@
 
 // 懒加载
 - (MKPushAnimator *)pushAnimator {
-    if (!_pushAnimator) {
-        _pushAnimator = [[MKPushAnimator alloc] initWithAnimator:self];
-    }
+    _pushAnimator = [[MKPushAnimator alloc] initWithAnimator:self];
     return _pushAnimator;
 }
 
 - (MKPopAnimator *)popAnimator {
-    if (!_popAnimator) {
-        _popAnimator = [[MKPopAnimator alloc] initWithAnimator:self];
-    }
+    _popAnimator = [[MKPopAnimator alloc] initWithAnimator:self];
     return _popAnimator;
 }
 
 - (MKPresentAnimator *)presentAnimator {
-    if (!_presentAnimator) {
-        _presentAnimator = [[MKPresentAnimator alloc] initWithAnimator:self];
-    }
+    _presentAnimator = [[MKPresentAnimator alloc] initWithAnimator:self];
     return _presentAnimator;
 }
 
 - (MKDismissAnimator *)dismissAnimator {
-    if (!_dismissAnimator) {
-        _dismissAnimator = [[MKDismissAnimator alloc] initWithAnimator:self];
-    }
+    _dismissAnimator = [[MKDismissAnimator alloc] initWithAnimator:self];
     return _dismissAnimator;
 }
 
@@ -185,6 +186,7 @@
 
 - (void)dismissAnimateBlock:(transitionAnimateParameters)animateBlock {
     self.dismissAnimateBlock = animateBlock;
+    [self dismiss];
 }
 
 @end
@@ -204,6 +206,7 @@
 
 - (void)popAnimateBlock:(transitionAnimateParameters)animateBlock {
     self.popAnimateBlock = animateBlock;
+    [self pop];
 }
 
 @end
