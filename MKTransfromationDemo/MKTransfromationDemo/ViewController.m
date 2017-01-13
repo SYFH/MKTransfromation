@@ -10,10 +10,11 @@
 #import "SecondController.h"
 #import "UIViewController+Transformator.h"
 
-@interface ViewController ()<UITableViewDelegate, MKTransitionPushProtocol>
+@interface ViewController ()<UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *Cover;
+@property (weak, nonatomic) IBOutlet UIView *Name;
 
-@property (nonatomic, strong) UIControl *hitArea;
-
+@property (weak, nonatomic) IBOutlet UIControl *hitAera;
 @end
 
 @implementation ViewController
@@ -21,26 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    self.hitArea.frame = CGRectMake(0, 0, 100, 100);
-    self.hitArea.center = self.view.center;
-    self.hitArea.backgroundColor = [UIColor orangeColor];
-    [self.hitArea addTarget:self action:@selector(hitAreaHit:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.hitArea];
-}
-
-- (void)hitAreaHit:(UIControl *)sendr {
-    SecondController *secondController = [[SecondController alloc] init];
-    self.transformtor.transitionDuration = 0.25;
-    [self.transformtor pushToViewController:secondController withAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
-        
-        toView.frame = self.hitArea.frame;
-        [containerView addSubview:toView];
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            toView.frame = [UIScreen mainScreen].bounds;
-        }];
-    }];
+    [self.hitAera addTarget:self action:@selector(hitControl:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,27 +30,44 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 代理
-- (NSTimeInterval)pushAnimateDuration {
-    return 0.25;
-}
-
-- (void)pushAnimateDidAnimateFromView:(UIView *)fromView toView:(UIView *)toView containerView:(UIView *)containerView {
-    containerView.backgroundColor = [UIColor whiteColor];
-    toView.frame = self.hitArea.frame;
-    [containerView addSubview:toView];
+- (IBAction)hitControl:(UIControl *)sender {
+    SecondController *secondController = [[SecondController alloc] init];
+    secondController.transformtor.transitionDuration = 0.3;
     
-    [UIView animateWithDuration:[self pushAnimateDuration] animations:^{
+    secondController.cover.hidden = YES;
+    secondController.name.hidden = YES;
+    secondController.brief1.hidden = YES;
+    secondController.brief2.hidden = YES;
+    secondController.brief3.hidden = YES;
+    secondController.brief4.hidden = YES;
+    secondController.item1.hidden = YES;
+    secondController.item2.hidden = YES;
+    secondController.item3.hidden = YES;
+    
+    __weak typeof(secondController) weakVC = secondController;
+    __weak typeof(self) weakSelf = self;
+    [self.transformtor pushToViewController:secondController withAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView, NSTimeInterval duration) {
+        
+        __strong typeof(weakVC) strongVC = weakVC;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         toView.frame = [UIScreen mainScreen].bounds;
+        [containerView addSubview:toView];
+        
+        UIView *cover = [strongVC.cover snapshotViewAfterScreenUpdates:NO];
+        cover.backgroundColor = [UIColor orangeColor];
+        cover.frame = strongSelf.Cover.frame;
+        [containerView addSubview:cover];
+        
+        [UIView animateWithDuration:duration animations:^{
+            cover.frame = strongVC.cover.frame;
+        } completion:^(BOOL finished) {
+            [cover removeFromSuperview];
+        }];
     }];
 }
 
+#pragma mark - 代理
+
 #pragma mark - 懒加载
-- (UIControl *)hitArea {
-    if (!_hitArea) {
-        _hitArea = [[UIControl alloc] init];
-    }
-    return _hitArea;
-}
 
 @end

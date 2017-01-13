@@ -18,31 +18,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor orangeColor];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.transformtor popAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
-        
-        toView.frame = [UIScreen mainScreen].bounds;
-        [containerView addSubview:toView];
-        
-        [UIView animateWithDuration:0.25 animations:^{
-            fromView.frame = self.restoreFrame;
-        }];
-    }];
-    
-//    [self.transformtor dismissAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView) {
-//        fromView.frame = [UIScreen mainScreen].bounds;
+//    __weak typeof(self) weakSelf = self;
+//    [self.transformtor popAnimateBlock:^(UIView *fromView, UIView *toView, UIView *containerView, NSTimeInterval duration) {
+//        
 //        toView.frame = [UIScreen mainScreen].bounds;
+//        fromView.frame = [UIScreen mainScreen].bounds;
 //        [containerView addSubview:toView];
 //        [containerView addSubview:fromView];
 //        
-//        [UIView animateWithDuration:0.25 animations:^{
-//            fromView.alpha = 0;
+//        [UIView animateWithDuration:duration animations:^{
+//            
 //        }];
 //    }];
-//    [self.transformtor dismiss];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

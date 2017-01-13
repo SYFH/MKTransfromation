@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B321A661E28C63F001DA5B5 /* Second.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B321A651E28C63F001DA5B5 /* Second.storyboard */; };
 		0B41981E1E22112300DAEFF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B41981D1E22112300DAEFF7 /* main.m */; };
 		0B4198211E22112300DAEFF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4198201E22112300DAEFF7 /* AppDelegate.m */; };
 		0B4198241E22112300DAEFF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4198231E22112300DAEFF7 /* ViewController.m */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B321A651E28C63F001DA5B5 /* Second.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Second.storyboard; sourceTree = "<group>"; };
 		0B4198191E22112300DAEFF7 /* MKTransfromationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MKTransfromationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B41981D1E22112300DAEFF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0B41981F1E22112300DAEFF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -109,9 +111,10 @@
 				0B4198201E22112300DAEFF7 /* AppDelegate.m */,
 				0B4198221E22112300DAEFF7 /* ViewController.h */,
 				0B4198231E22112300DAEFF7 /* ViewController.m */,
+				0B4198251E22112300DAEFF7 /* Main.storyboard */,
 				0B4198431E22200B00DAEFF7 /* SecondController.h */,
 				0B4198441E22200B00DAEFF7 /* SecondController.m */,
-				0B4198251E22112300DAEFF7 /* Main.storyboard */,
+				0B321A651E28C63F001DA5B5 /* Second.storyboard */,
 				0B4198281E22112400DAEFF7 /* Assets.xcassets */,
 				0B41982A1E22112400DAEFF7 /* LaunchScreen.storyboard */,
 				0B41982D1E22112400DAEFF7 /* Info.plist */,
@@ -241,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B321A661E28C63F001DA5B5 /* Second.storyboard in Resources */,
 				0B41982C1E22112400DAEFF7 /* LaunchScreen.storyboard in Resources */,
 				0B4198291E22112400DAEFF7 /* Assets.xcassets in Resources */,
 				0B4198271E22112300DAEFF7 /* Main.storyboard in Resources */,
