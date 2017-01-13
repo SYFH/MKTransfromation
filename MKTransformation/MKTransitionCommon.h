@@ -6,4 +6,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef void(^transitionAnimateParameters)(UIView *fromView, UIView *toView, UIView *containerView);
+typedef void(^transitionAnimateParameters)(UIView *fromView,
+                                           UIView *toView,
+                                           UIView *containerView,
+                                           NSTimeInterval duration);

@@ -24,6 +24,7 @@
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
     if ([self.animator.presentAnimateDelegate respondsToSelector:@selector(presentAnimateDuration)]) {
+        self.animator.transitionDuration = [self.animator.presentAnimateDelegate presentAnimateDuration];
         return [self.animator.presentAnimateDelegate presentAnimateDuration];
     } else if (self.animator.transitionDuration) {
         return self.animator.transitionDuration;
@@ -54,12 +55,17 @@
     }
     
     NSOperationQueue *queue = [NSOperationQueue mainQueue];
+    __weak typeof(self) weakSelf = self;
     NSBlockOperation *didOperation = [NSBlockOperation blockOperationWithBlock:^{
-        self.animator.presenAnimateBlock(fromView, toView, containerView);
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.animator.presenAnimateBlock(fromView, toView, containerView, strongSelf.animator.transitionDuration);
     }];
     NSBlockOperation *overOperation = [NSBlockOperation blockOperationWithBlock:^{
-        BOOL wasCancelled = [transitionContext transitionWasCancelled];
-        [transitionContext completeTransition:!wasCancelled];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(strongSelf.animator.transitionDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            BOOL wasCancelled = [transitionContext transitionWasCancelled];
+            [transitionContext completeTransition:!wasCancelled];
+        });
     }];
     
     [overOperation addDependency:didOperation];
@@ -78,10 +84,11 @@
     
     NSOperationQueue *queue = [NSOperationQueue mainQueue];
     NSBlockOperation *didOperation = [NSBlockOperation blockOperationWithBlock:^{
-        if ([self.animator.presentAnimateDelegate respondsToSelector:@selector(presentAnimateDidAnimateFromView:toView:containerView:)]) {
+        if ([self.animator.presentAnimateDelegate respondsToSelector:@selector(presentAnimateDidAnimateFromView:toView:containerView:duration:)]) {
             [self.animator.presentAnimateDelegate presentAnimateDidAnimateFromView:fromView
                                                                             toView:toView
-                                                                     containerView:containerView];
+                                                                     containerView:containerView
+                                                                          duration:self.animator.transitionDuration];
         }
     }];
     NSBlockOperation *overOperation = [NSBlockOperation blockOperationWithBlock:^{

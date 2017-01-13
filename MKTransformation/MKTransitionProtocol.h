@@ -12,7 +12,8 @@
 - (NSTimeInterval)pushAnimateDuration;
 - (void)pushAnimateDidAnimateFromView:(UIView *)fromView
                                toView:(UIView *)toView
-                        containerView:(UIView *)containerView;
+                        containerView:(UIView *)containerView
+                             duration:(NSTimeInterval)duration;
 
 @end
 
@@ -22,7 +23,8 @@
 - (NSTimeInterval)popAnimateDuration;
 - (void)popAnimateDidAnimateFromView:(UIView *)fromView
                               toView:(UIView *)toView
-                       containerView:(UIView *)containerView;
+                       containerView:(UIView *)containerView
+                            duration:(NSTimeInterval)duration;
 
 @end
 
@@ -32,7 +34,8 @@
 - (NSTimeInterval)presentAnimateDuration;
 - (void)presentAnimateDidAnimateFromView:(UIView *)fromView
                                   toView:(UIView *)toView
-                           containerView:(UIView *)containerView;
+                           containerView:(UIView *)containerView
+                                duration:(NSTimeInterval)duration;
 
 @end
 
@@ -42,6 +45,7 @@
 - (NSTimeInterval)dismissAnimateDuration;
 - (void)dismissAnimateDidAnimateFromView:(UIView *)fromView
                                   toView:(UIView *)toView
-                           containerView:(UIView *)containerView;
+                           containerView:(UIView *)containerView
+                                duration:(NSTimeInterval)duration;
 
 @end

@@ -24,6 +24,7 @@
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
     if ([self.animator.popAnimateDelegate respondsToSelector:@selector(popAnimateDuration)]) {
+        self.animator.transitionDuration = [self.animator.popAnimateDelegate popAnimateDuration];
         return [self.animator.popAnimateDelegate popAnimateDuration];
     } else if (self.animator.transitionDuration) {
         return self.animator.transitionDuration;
@@ -57,11 +58,14 @@
     __weak typeof(self) weakSelf = self;
     NSBlockOperation *didOperation = [NSBlockOperation blockOperationWithBlock:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.animator.popAnimateBlock(fromView, toView, containerView);
+        strongSelf.animator.popAnimateBlock(fromView, toView, containerView, strongSelf.animator.transitionDuration);
     }];
     NSBlockOperation *overOperation = [NSBlockOperation blockOperationWithBlock:^{
-        BOOL wasCancelled = [transitionContext transitionWasCancelled];
-        [transitionContext completeTransition:!wasCancelled];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(strongSelf.animator.transitionDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            BOOL wasCancelled = [transitionContext transitionWasCancelled];
+            [transitionContext completeTransition:!wasCancelled];
+        });
     }];
     
     [overOperation addDependency:didOperation];
@@ -82,10 +86,11 @@
     __weak typeof(self) weakSelf = self;
     NSBlockOperation *didOperation = [NSBlockOperation blockOperationWithBlock:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if ([strongSelf.animator.popAnimateDelegate respondsToSelector:@selector(popAnimateDidAnimateFromView:toView:containerView:)]) {
+        if ([strongSelf.animator.popAnimateDelegate respondsToSelector:@selector(popAnimateDidAnimateFromView:toView:containerView:duration:)]) {
             [strongSelf.animator.popAnimateDelegate popAnimateDidAnimateFromView:fromView
-                                                                    toView:toView
-                                                             containerView:containerView];
+                                                                          toView:toView
+                                                                   containerView:containerView
+                                                                        duration:self.animator.transitionDuration];
         }
     }];
     NSBlockOperation *overOperation = [NSBlockOperation blockOperationWithBlock:^{
