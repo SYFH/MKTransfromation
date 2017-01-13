@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  MenuController.h
 //  MKTransfromationDemo
 //
-//  Created by 云翼天 on 2017/1/8.
+//  Created by 云翼天 on 2017/1/13.
 //  Copyright © 2017年 SYFH. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MenuController : UIViewController
 
 @end
-
